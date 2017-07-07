@@ -47,7 +47,7 @@ song = params.slice(3).join(" ");
 if(!song) song = "The Sign Ace of Base";
 
 spotifyClient.search({ type: 'track', query: song }, function(err, data) {
-	// console.log(data.tracks.body);
+	// console.log(JSON.stringify(data, null, 2));
 	if ( err ) {
 		console.log('Error occurred: ' + err);
         return;  //from spotify npm docs
