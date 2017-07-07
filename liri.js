@@ -1,6 +1,6 @@
 var Twitter = require("twitter");
 var Spotify = require("node-spotify-api");
-var require = require("request");
+var request = require("request");
 
 var apiKeys = require("./keys.js");
 
@@ -35,20 +35,24 @@ case "spotify-this-song":
 
 var song = "";
 
-	for (var i = 3; i < params.length; i++) {
+// 	for (var i = 3; i < params.length; i++) {
 
-  // Build a string with the arguments.
-  song = song + " " + params[i];
+//   // Build a string with the arguments.
+//   song = song + " " + params[i];
 
-}
+// }
+
+song = params.slice(3).join(" ");
+// console.log("song: " + song);
+if(!song) song = "The Sign Ace of Base";
+
 spotifyClient.search({ type: 'track', query: song }, function(err, data) {
 	// console.log(data.tracks.body);
 	if ( err ) {
 		console.log('Error occurred: ' + err);
         return;  //from spotify npm docs
-    } else if (!song) {
-    	song = "Set Fire to the Rain";
     }
+
     else{
     	var songInfo = data.tracks.items[0];
     	var songResult = console.log(songInfo.artists[0].name)
