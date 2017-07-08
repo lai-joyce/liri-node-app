@@ -32,7 +32,7 @@ var params = process.argv;
 
 		case "movie-this":
 
-		grabMovieInfo();
+		grabMovieInfo(params.slice(3).join(" "));
 
 		break;
 
@@ -69,11 +69,6 @@ function getTweets() {
 
 function spotifyIt(song) {
 
-	// console.log(song);
-
-	// var song = "";
-	// console.log(arguments);
-
 
 // 	for (var i = 3; i < params.length; i++) {
 
@@ -82,25 +77,16 @@ function spotifyIt(song) {
 
 // }
 
-	
-
-	// if(arguments[0]){
-	// 	song = arguments[0];
-	// } 
-	// else{
-		// song = params.slice(3).join(" ");
-
-		// console.log("params: " + params);
+	// song = params.slice(3).join(" ");
 
 		// console.log("this song is : " + song)
-		// console.log("song: " + song);
+		
 		if(!song) song = "The Sign Ace of Base";
 	// }
 	// console.log(song)
 
 	spotifyClient.search({ type: 'track', query: song }, function(err, data) {
-		// console.log(song, 'SONGSONGSONG')
-		// console.log('typeof', typeof song === typeof "The Sign Ace of Base")
+		
 		// console.log(JSON.stringify(data, null, 2));
 		if ( err ) {
 			console.log('Error occurred: ' + err);
@@ -115,12 +101,12 @@ function spotifyIt(song) {
 	    	console.log(songInfo.preview_url)
 	    // console.log(songResult);
 	};
-	});
+});
 }
 
-function grabMovieInfo() {
+function grabMovieInfo(movie) {
 	// var movieName = process.argv[3];
-	movie = params.slice(3).join(" ");
+	// movie = params.slice(3).join(" ");
 	if(!movie) movie = "Mr. Nobody";
 
 	var queryUrl = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
@@ -145,88 +131,6 @@ request(queryUrl, function(error, response, body) {
 });
 }
 
-// function followTheText() {
-//      fs.readFile("random.txt", "utf8", function(error, data)
-//      {
-//      	// If an error was experienced we say it.
-//      	if(error){
-//      		console.log(error);
-//      	}
-//           else {
-//                var dataArray = data.split(',');
-//                var argOne = dataArray[0];
-//                var argTwo = dataArray[1];
-//                switch(argOne) {
-//                     case "my-tweets":
-//                          getTweets();
-//                          break;
-//                     case "spotify-this-song":
-//                        var queryInput = "the sign ace of base";
-//                        if (argTwo !== undefined){
-//                            queryInput = argTwo;
-//                        }
-                         // function spotifyIt() {
-                         //      var queryInput = "the sign ace of base";
-                         //      if (argTwo !== undefined){
-                         //           queryInput = argTwo;
-                         //      }
-                         //      console.log('TYPE', typeof queryInput);
-                         //      spotifyClient.search({ type: 'track', query: queryInput }, function(err, data) {
-                         //           if ( err ) {
-                         //                console.log('Error occurred: ' + err);
-                         //                return;
-                         //           } else {
-                         //           		console.log(data)
-                         //           }
-
-                         //           // console.log("Artist: " + data.tracks.items[0].artists[0].name);
-                         //           // console.log("Song Name: " + data.tracks.items[0].name);
-                         //           // console.log("Spotify Preview Link: " + data.tracks.items[0].preview_url);
-                         //           // console.log("Album: " + data.tracks.items[0].album.name);
-                         //           // fs.appendFile('log.txt', "Artist: " + data.tracks.items[0].artists[0].name + "\n" + 
-                         //           // 	"Song Name: " + data.tracks.items[0].name + "\n" + "Spotify Preview Link: " + 
-                         //           // 	data.tracks.items[0].external_urls.spotify + "\n" + "Album: " + 
-                         //           // 	data.tracks.items[0].album.name + "\n" + "=================================================================");
-                         //      });
-                         // }
-                    //      spotifyIt(queryInput);
-                    //      break;
-                    // case "movie-this":
-                    //      function grabMovieInfo() {
-                    //           var queryInput = "Mr. Nobody";
-                    //           if (argTwo !== undefined) {
-                    //                queryInput = argTwo;
-                    //           }
-                    //           request('http://www.omdbapi.com/?t=' + queryInput + "&tomatoes=true", function (error, response, body) {
-                    //                if (!error && response.statusCode == 200) {
-                    //                     var movieData = JSON.parse(body);
-                    //                     console.log("Title: " + movieData.Title);
-                    //                     console.log("Year: " + movieData.Year);
-                    //                     console.log("IMDB Rating: " + movieData.imdbRating);
-                    //                     console.log("Country: " + movieData.Country);
-                    //                     console.log("Language: " + movieData.Language);
-                    //                     console.log("Plot: " + movieData.Plot);
-                    //                     console.log("Actors: " + movieData.Actors);
-                    //                     console.log("Rotten Tomatoes Rating: " + movieData.tomatoUserRating);
-                            		     // console.log("Rotten Tomatoes URL: " + movieData.tomatoURL);
-                                   //      fs.appendFile('log.txt', "Title: " + movieData.Title + "\n" + "Year: " + movieData.Year + "\n" + 
-                                   //      	"IMDB Rating: " + movieData.imdbRating + "\n" + "Country: " + movieData.Country + 
-                                   //      	"\n" + "Language: " + movieData.Language + "\n" + "Plot: " + movieData.Plot + "\n" + 
-                                   //      	"Actors: " + movieData.Actors + "\n" + "Rotten Tomatoes Rating: " + movieData.tomatoUserRating + "\n" + 
-                                   //      	"Rotten Tomatoes URL: " + movieData.tomatoURL + "\n" + "=================================================================");
-                         //           }
-                         //           else {
-                         //                console.log(error);
-                         //           }
-                         //      });
-                         // }
-//                          grabMovieInfo();
-//                          break;
-//                }
-//           }
-//      });
-// }
-
 function followTheText() {
 
 	fs.readFile("random.txt", "utf8", function(error, data) {
@@ -241,18 +145,16 @@ function followTheText() {
 
 		// console.log(dataArr);
 
-  // console.log( "THis is my file reader: " + dataArr[1]);
 
+		
+		if (dataArr[0] === "spotify-this-song") {
+			spotifyIt(dataArr[1]);
+		}
+		
+		else {
+			grabMovieInfo(dataArr[1]);
+		}
+		
 
-  		spotifyIt(dataArr[1]);
-  // if (dataArr[0] === "spotify-this-song") {
-  // 		spotifyIt(dataArr[1]);
-  // }
-  
-  // else {
-  // 		grabMovieInfo(dataArr[1]);
-  // }
-  		
-
-});
+	});
 }
